@@ -7,13 +7,15 @@ import { FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
+    const [success, setSuccess] = useState('');
     const [password, setPassword] = useState('');
     const [resgistredError, setResgistred] = useState('');
-    const [success, setSuccess] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSignUp = (e) => {
         e.preventDefault();
+        const accepted = e.target.terms.checked;
+
         if (password.length < 6) {
             setResgistred('Password must be at least 6 characters long');
             return;
@@ -22,6 +24,11 @@ const SignUp = () => {
             setResgistred('Password must contain at least two upper case letters');
             return;
         }
+        else if (!accepted) {
+            setResgistred('Please accept our Terms and condition');
+            return;
+        }
+    
         setResgistred('');
         setSuccess('');
         createUserWithEmailAndPassword(auth, email, password)
@@ -53,7 +60,7 @@ const SignUp = () => {
                             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
-                    <div>
+                    <div className='relative'>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                             Password
                         </label>
@@ -65,9 +72,13 @@ const SignUp = () => {
                             required
                             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
-                        <button className='mt-5' onClick={() => setShowPassword(!showPassword)}><span>
+                        <span onClick={() => setShowPassword(!showPassword)} className='absolute top-9 right-5 cursor-pointer'>
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </span></button>
+                        </span>
+                        <div className='items-center flex mt-2'>
+                            <input type="checkbox" name="terms" id="" />
+                            <label className='ml-2' htmlFor="terms">Please accept our Terms and condition</label>
+                        </div>
                     </div>
                     <button
                         type="submit"
