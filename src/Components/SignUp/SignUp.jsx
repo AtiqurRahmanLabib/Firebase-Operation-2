@@ -1,4 +1,6 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
+import auth from '../../Firebase/firebase.init';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -6,7 +8,13 @@ const SignUp = () => {
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        // Handle sign up logic here
+        createUserWithEmailAndPassword(auth, email, password)
+        .then( result => {
+            console.log(result);
+        })
+        .catch( error => {
+            console.log(error);
+        })
     };
 
     return (

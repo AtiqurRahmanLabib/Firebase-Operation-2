@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 const Navbar = () => {
     return (
-        <div className="w-[1171px] h-[57px] mx-auto mt-5 flex">
-            <nav className="w-[1171px] flex h-[57px] justify-between items-center">
+        <div className="w-[1171px] h-[57px] mx-auto mt-5 flex shadow-9xl">
+            <nav className="w-[1171px] flex h-[57px] justify-between items-center shadow-2xl pb-5">
                 <div className="font-bold text-[28px] text-[#131313]">
                     <h1>Firebase oparation 2</h1>
                 </div>
