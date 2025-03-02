@@ -5,16 +5,26 @@ import auth from '../../Firebase/firebase.init';
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [resgistredError, setResgistred] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleSignUp = (e) => {
         e.preventDefault();
+        if (password.length < 6) {
+            setResgistred('Password must be at least 6 characters long');
+            return;
+        }
+        setResgistred('');
+        setSuccess('');
         createUserWithEmailAndPassword(auth, email, password)
-        .then( result => {
-            console.log(result);
-        })
-        .catch( error => {
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result);
+                setSuccess('Account created successfully');
+            })
+            .catch(error => {
+                console.log(error);
+                setResgistred(error.message);
+            })
     };
 
     return (
@@ -55,6 +65,8 @@ const SignUp = () => {
                         Sign Up
                     </button>
                 </form>
+                {resgistredError && <p className="text-red-500 text-center font-bold">{resgistredError}</p>}
+                {success && <p className="text-green-500 text-center font-bold">{success}</p>}
             </div>
         </div>
     );
