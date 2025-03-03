@@ -20,7 +20,7 @@ const SignUp = () => {
             setResgistred('Password must be at least 6 characters long');
             return;
         }
-        else if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
+        else if (!/[A-Z]/.test(password)) {
             setResgistred('Password must contain at least two upper case letters');
             return;
         }
@@ -28,7 +28,7 @@ const SignUp = () => {
             setResgistred('Please accept our Terms and condition');
             return;
         }
-    
+
         setResgistred('');
         setSuccess('');
         createUserWithEmailAndPassword(auth, email, password)
