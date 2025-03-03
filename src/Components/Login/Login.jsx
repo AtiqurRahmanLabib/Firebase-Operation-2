@@ -15,17 +15,18 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Email: ", email, "Password: ", password)
-        console.log(emailRef.current.value);
+        e.preventDefault();   
         setSuccess('');
         setErrorMessage('');
         signInWithEmailAndPassword(auth, email, password)
-
             .then(result => {
+                console.log(result.user);
+                if(!result.user.emailVerified){
+                    setErrorMessage('Please verify your email');
+                    return;
+                }
                 setSuccess('Login successful');
             })
-
             .catch(error => {
                 const errorMessage = setErrorMessage(error.message);
                 setErrorMessage(errorMessage);
