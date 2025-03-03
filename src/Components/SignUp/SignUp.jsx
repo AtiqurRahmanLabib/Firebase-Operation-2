@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import auth from '../../Firebase/firebase.init';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -80,12 +81,17 @@ const SignUp = () => {
                             <label className='ml-2' htmlFor="terms">Please accept our Terms and condition</label>
                         </div>
                     </div>
+                    
                     <button
                         type="submit"
                         className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Sign Up
                     </button>
+                    <div className='flex gap-2'>
+                    <p className='font-bold'>Already have an account?</p>
+                    <Link className='text-green-500 text-center font-bold' to="/login">Login</Link>
+                    </div>
                 </form>
                 {resgistredError && <p className="text-red-500 text-center font-bold">{resgistredError}</p>}
                 {success && <p className="text-green-500 text-center font-bold">{success}</p>}
